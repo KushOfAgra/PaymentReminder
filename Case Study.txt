@@ -1,0 +1,19 @@
+1. The key requirements to be met for this project are : 1. Automating payment reminders 
+                                                         2. Integrating our solution with the legacy erp system
+                                                         3. Scaling the solution to handle 400-500 orders/day, with at least 5000 customers onboarded
+                                                         4. Optional objective being to reduce manual effort by the employees
+2. To begin, we evaluate potential automation approaches: Ranking approaches, we find that The best approach would be to use Backend frameworks like Flask or FastAPI, as they are able to be seamlessly integrated with most modern systems, and they provide high flexibility and customisation.
+3. Structure of the solution: First step would be DATA EXTRACTION from the ERP system. Second would be PROCESSING DEADLINES. Third comes the NOTIFICATION SYSTEM for the clients to send reminders. And the fourth and Final Step would be a DASHBOARD for the employees to record and track all these actions and any payments received or delayed.
+Step by step, the tools and stacks used would be: 
+ 1. Python script to extract and tabulate data from the erp, as date-time and dues
+ - Use flask for app design
+ - requests for api calls
+ - pyodbc for database queries
+ - Apscheduler to automate extraction
+ 2. Use pandas for processing the extracted tabular data, and datetime for date manipulation
+ 3. Use smtplib for sending emails, or integrate external APIs like Twilio for SMS/Whatsapp integration
+ 4. Log any communication between client and company, to ensure that tracking and reporting is streamlined.
+ 5. Not knowing what stack ABinBEV currently used as their ERP and EDH solution makes it difficult to actually process and demo integration, but a template for a python script including all these apis should suffice.
+ 6. Deploy the app on a platform as the final step and test.
+4. Now for testing, we use mockaroo to create a mock database for Customer ID, First and Last Name, Due Payment Date, payment amount,email and phone number. Using this database, we test our code for extraction, processing and errors in logging.
+5. After testing our script for any errors or mistakes, We move on to creating a dashboard for usage by employees.
