@@ -1,3 +1,4 @@
+#This is the basic template followed for this project, the code is the other file on the repo, named FinalCodeComposed
 from flask import Flask, request
 import pandas as pd
 
