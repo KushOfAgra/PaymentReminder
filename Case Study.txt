@@ -7,13 +7,15 @@
 Step by step, the tools and stacks used would be: 
  1. Python script to extract and tabulate data from the erp, as date-time and dues
  - Use flask for app design
- - requests for api calls
- - pyodbc for database queries
+ - Using Pandas for processing data, and for analysis and manipulation
+ - If given an ERP, requests for api calls
+ - Again, if given a database, pyodbc for database queries
  - Apscheduler to automate extraction
  2. Use pandas for processing the extracted tabular data, and datetime for date manipulation
  3. Use smtplib for sending emails, or integrate external APIs like Twilio for SMS/Whatsapp integration
- 4. Log any communication between client and company, to ensure that tracking and reporting is streamlined.
+ 4. Log any communication between client and company, to ensure that tracking and reporting is streamlined, this can be done directly from the mail account used for the script.
  5. Not knowing what stack ABinBEV currently used as their ERP and EDH solution makes it difficult to actually process and demo integration, but a template for a python script including all these apis should suffice.
  6. Deploy the app on a platform as the final step and test.
 4. Now for testing, we use mockaroo to create a mock database for Customer ID, First and Last Name, Due Payment Date, payment amount,email and phone number. Using this database, we test our code for extraction, processing and errors in logging.
 5. After testing our script for any errors or mistakes, We move on to creating a dashboard for usage by employees.
+6. Using Streamlit, we can create a simple dashboard, with interactive filters, that can be used by sales employees to track payment dates and amounts by name or customer id.
