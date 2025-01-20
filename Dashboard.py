@@ -14,6 +14,15 @@ def load_data():
 def filter_data(data, days_filter):
     return data[data['days_until_due'] <= days_filter]
 
+def filter_exact_days(data, days_filter):
+    return data[data['days_until_due'] == days_filter]
+
+def search_by_id(data, search_id):
+    return data[data['id'] == search_id]
+
+def search_by_name(data, search_name):
+    return data[data['first_name'].str.contains(search_name, case=False, na=False) | data['last_name'].str.contains(search_name, case=False, na=False)]
+
 # Streamlit app
 st.title("Payment Reminder Dashboard")
 
@@ -29,16 +38,34 @@ selected_days = st.sidebar.number_input(
     step=1
 )
 
+# Checkbox for showing exact reminders
+show_exact_reminders = st.sidebar.checkbox("Show specific Reminder for these days")
+
+# Search options
+st.sidebar.header("Search Options")
+search_id = st.sidebar.text_input("Search by ID")
+search_name = st.sidebar.text_input("Search by Name")
+
 # Apply filters
-filtered_data = filter_data(data, selected_days)
+if show_exact_reminders:
+    filtered_data = filter_exact_days(data, selected_days)
+else:
+    filtered_data = filter_data(data, selected_days)
+
+if search_id:
+    filtered_data = search_by_id(filtered_data, int(search_id))
+
+if search_name:
+    filtered_data = search_by_name(filtered_data, search_name)
 
 # Display filtered data
 st.header("Upcoming Payment Reminders")
 
 if not filtered_data.empty:
     st.dataframe(
-        filtered_data[['first_name', 'last_name', 'email', 'due_date', 'due_amount', 'days_until_due']]
+        filtered_data[['id', 'first_name', 'last_name', 'email', 'due_date', 'due_amount', 'days_until_due']]
         .rename(columns={
+            'id': 'ID',
             'first_name': 'First Name',
             'last_name': 'Last Name',
             'email': 'Email',
